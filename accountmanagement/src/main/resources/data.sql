@@ -1,0 +1,11 @@
+INSERT INTO account_type VALUES (1,'salary');
+INSERT INTO account_type VALUES (2,'saving');
+INSERT INTO account_type VALUES (3,'INVERSTMENT');
+commit;
+INSERT INTO account_status VALUES (1,'active');
+INSERT INTO account_status VALUES (2,'in active');
+INSERT INTO transaction_type VALUES (1,'credit');
+INSERT INTO transaction_type VALUES (2,'debited');
+INSERT INTO transaction_status VALUES (1,'success');
+INSERT INTO transaction_status VALUES (2,'failure');
+commit;

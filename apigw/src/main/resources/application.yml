@@ -1,0 +1,51 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: api-gateway
+
+    cloud:
+       gateway:
+          globalcors:
+           corsConfigurations:
+            '[/**]':
+             allowedOrigins: "*"
+             allowedMethods:
+               - GET
+               - POST    
+          routes:
+            - id: customermanagment
+              uri: lb://customermanagment
+              predicates:
+                - Path=/api/v1/customers/**,/customermanagment/v3/api-docs
+            - id: accountmanagment
+              uri: lb://accountmanagment
+              predicates:
+                - Path=/api/v1/account/**,/accountmanagment/v3/api-docs
+        
+          
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+        fetch-registry: true
+        register-with-eureka: true
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+       
+      - url: /customermanagment/v3/api-docs
+        name: customermanagment Service
+      - url: /accountmanagment/v3/api-docs
+        name: accountmanagment Service  
+        
+ 
