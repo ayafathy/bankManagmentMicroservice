@@ -19,12 +19,12 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final ModelMapper modelMapper;
+
     
-    public void validateregisterCustomer(CustomerRegistrationRequest request) throws BusinessExceptions {
+    private void validateregisterCustomer(CustomerRegistrationRequest request) throws BusinessExceptions {
     	Optional<Customer> customer = customerRepository.findByEmail(request.email());
-    	if(customer.isPresent()) {
-    		throw new BusinessExceptions("customer email already Exist");
+    	if(!customer.isEmpty()) {
+    		throw new BusinessExceptions(BankConstant.CUSTOMER_ALREADY_EXIST);
     	}
     	
     }
